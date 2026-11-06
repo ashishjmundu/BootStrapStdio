@@ -1,0 +1,1268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap Studio | Learning Hub</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --orange: #ff792f;
+    --dark: #172033;
+    --light: #fff1e8;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f9fa;
+    transition: background .4s;
+}
+
+.navbar {
+    background: white;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -1px;
+}
+
+.brand-dot {
+    color: var(--orange);
+}
+
+.hero {
+    background: linear-gradient(120deg, #172033, #293b58);
+    color: white;
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: var(--orange);
+}
+
+.hero-card {
+    background: white;
+    color: var(--dark);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+}
+
+.btn-orange {
+    background: var(--orange);
+    color: white;
+    border: none;
+}
+
+.btn-orange:hover {
+    background: #e9631c;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.section-label {
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.demo-section {
+    padding: 75px 0;
+}
+
+.demo-card {
+    border: none;
+    border-radius: 15px;
+    transition: .3s;
+    height: 100%;
+}
+
+.demo-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.1);
+}
+
+.icon-box {
+    background: #fff0e7;
+    color: var(--orange);
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.orange-section {
+    background: var(--light);
+}
+
+.code-label {
+    background: var(--dark);
+    color: #ffb07f;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.sample-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.carousel-item img {
+    height: 350px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.footer {
+    background: var(--dark);
+    color: white;
+}
+
+.footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--orange);
+}
+
+.secret-message {
+    display: none;
+    background: #fff0e7;
+    border: 2px dashed var(--orange);
+    padding: 15px;
+    border-radius: 12px;
+    color: var(--dark);
+    margin-top: 15px;
+    animation: popIn .4s ease;
+}
+
+.secret-message.show {
+    display: block;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.secret-btn {
+    border: none;
+    background: transparent;
+    color: var(--orange);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.secret-title {
+    cursor: pointer;
+    transition: .3s;
+}
+
+.secret-title:hover {
+    color: #ffb07f;
+}
+
+#eggToast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    max-width: 320px;
+    width: calc(100% - 50px);
+}
+
+#eggToast .alert {
+    margin-bottom: 0;
+}
+
+.clickable-badge {
+    cursor: pointer;
+    transition: .2s;
+}
+
+.clickable-badge:hover {
+    transform: scale(1.08);
+}
+
+#secretProgress {
+    cursor: pointer;
+}
+
+#celebration {
+    position: fixed;
+    inset: 0;
+    background: rgba(23,32,51,.94);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+#celebration.show {
+    display: flex;
+    animation: popIn .3s ease;
+}
+
+.celebration-content {
+    max-width: 500px;
+}
+
+.celebration-content h1 {
+    font-size: 3rem;
+    color: var(--orange);
+}
+
+#closeCelebration {
+    margin-top: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOAST NOTIFICATION -->
+<div id="eggToast" style="display:none;"></div>
+
+<!-- SECRET CELEBRATION -->
+<div id="celebration">
+    <div class="celebration-content">
+        <h1>🎉 DEVELOPER MODE!</h1>
+        <h3>You found the secret level.</h3>
+        <p>
+            Congratulations! You have officially entered
+            the hidden side of Bootstrap Studio.
+        </p>
+        <p>Keep coding. Keep creating. Keep breaking things and fixing them. 💻</p>
+        <button class="btn btn-orange rounded-pill px-4" id="closeCelebration">
+            Back to website
+        </button>
+    </div>
+</div>
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+<div class="container">
+
+<a class="navbar-brand" href="#home" id="brandLogo">
+BOOTSTRAP<span class="brand-dot">.</span>STUDIO
+</a>
+
+<button class="navbar-toggler" type="button"
+data-bs-toggle="collapse" data-bs-target="#mainNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="mainNav">
+
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#components">Components</a></li>
+<li class="nav-item"><a class="nav-link" href="#layouts">Layouts</a></li>
+<li class="nav-item"><a class="nav-link" href="#forms">Forms</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+</ul>
+
+<a href="#components" class="btn btn-orange rounded-pill px-4 ms-lg-3">
+Explore Now
+</a>
+
+</div>
+</div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="container">
+<div class="row align-items-center g-5">
+
+<div class="col-lg-7">
+
+<span class="badge bg-warning text-dark mb-3 clickable-badge"
+id="complimentBadge">
+LEARN • EXPLORE • CREATE ✨
+</span>
+
+<h1 class="secret-title" id="secretTitle">
+Discover the power of <span>Bootstrap.</span>
+</h1>
+
+<div id="titleSecret" class="secret-message">
+🎉 You found something!
+Even the smallest lines of code can create something amazing.
+</div>
+
+<p class="lead text-light mt-4">
+A simple interactive learning space to explore
+Bootstrap components, responsive layouts and modern web design.
+</p>
+
+<div class="mt-4">
+<a href="#components" class="btn btn-orange btn-lg rounded-pill px-4 me-2">
+Explore Components →
+</a>
+
+<a href="#about" class="btn btn-outline-light btn-lg rounded-pill px-4">
+Learn More
+</a>
+</div>
+
+<div class="d-flex gap-4 mt-5">
+<div>
+<h3 class="fw-bold">12+</h3>
+<small>Components</small>
+</div>
+<div>
+<h3 class="fw-bold">100%</h3>
+<small>Responsive</small>
+</div>
+<div>
+<h3 class="fw-bold">Easy</h3>
+<small>To Learn</small>
+</div>
+</div>
+
+</div>
+
+<div class="col-lg-5">
+<div class="hero-card">
+
+<div class="d-flex justify-content-between">
+<h5 class="fw-bold">Your Learning Space</h5>
+<span class="badge bg-success">Active</span>
+</div>
+
+<hr>
+
+<div class="mb-4">
+<div class="d-flex justify-content-between">
+<span>HTML Basics</span><b>90%</b>
+</div>
+<div class="progress mt-2">
+<div class="progress-bar bg-success" style="width:90%"></div>
+</div>
+</div>
+
+<div class="mb-4">
+<div class="d-flex justify-content-between">
+<span>CSS Styling</span><b>75%</b>
+</div>
+<div class="progress mt-2">
+<div class="progress-bar bg-warning" style="width:75%"></div>
+</div>
+</div>
+
+<div class="mb-4">
+<div class="d-flex justify-content-between">
+<span>Bootstrap</span><b id="progressValue">60%</b>
+</div>
+<div class="progress" id="secretProgress" title="Try clicking me!">
+<div class="progress-bar" id="progressBar"
+style="width:60%;background:#ff792f"></div>
+</div>
+<small class="text-secondary">Hint: Progress takes patience... or a click.</small>
+</div>
+
+<div class="alert alert-primary mb-0">
+Keep learning. Great websites start with small steps!
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- COMPONENTS -->
+<section class="demo-section" id="components">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">THE BOOTSTRAP TOOLKIT</p>
+<h2 class="section-title">Explore Essential Components</h2>
+<p class="text-secondary">
+Bootstrap provides ready-made elements to build websites faster.
+</p>
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">🧭</div>
+<h5 class="fw-bold">Navigation Bar</h5>
+<p class="text-secondary">Navigate between different pages and sections.</p>
+<span class="code-label">.navbar</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">🃏</div>
+<h5 class="fw-bold">Cards</h5>
+<p class="text-secondary">Display information using attractive containers.</p>
+<span class="code-label">.card</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">🔘</div>
+<h5 class="fw-bold">Buttons</h5>
+<p class="text-secondary">Create interactive buttons with different styles.</p>
+<span class="code-label">.btn</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">📊</div>
+<h5 class="fw-bold">Progress Bars</h5>
+<p class="text-secondary">Show completion levels visually.</p>
+<span class="code-label">.progress</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">🔔</div>
+<h5 class="fw-bold">Alerts</h5>
+<p class="text-secondary">Display notifications and important messages.</p>
+<span class="code-label">.alert</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4">
+<div class="card demo-card shadow-sm p-3">
+<div class="icon-box mb-3">📝</div>
+<h5 class="fw-bold">Forms</h5>
+<p class="text-secondary">Collect user information through input fields.</p>
+<span class="code-label">.form-control</span>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- BUTTONS AND ALERTS -->
+<section class="demo-section orange-section">
+<div class="container">
+<div class="row g-4">
+
+<div class="col-lg-6">
+<p class="section-label">INTERACTIVE ELEMENTS</p>
+<h2 class="section-title mb-4">Buttons & Badges</h2>
+
+<div class="card border-0 shadow-sm p-4">
+<h6 class="fw-bold mb-3">Button Variations</h6>
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-success">Success</button>
+<button class="btn btn-danger">Danger</button>
+<button class="btn btn-warning">Warning</button>
+<button class="btn btn-orange">Orange</button>
+<button class="btn btn-outline-dark">Outline</button>
+</div>
+
+<hr>
+
+<h6 class="fw-bold mb-3">Bootstrap Badges</h6>
+<span class="badge bg-primary">New</span>
+<span class="badge bg-success">Completed</span>
+<span class="badge bg-danger">Important</span>
+<span class="badge bg-warning text-dark">Pending</span>
+</div>
+</div>
+
+<div class="col-lg-6">
+<p class="section-label">NOTIFICATIONS</p>
+<h2 class="section-title mb-4">Alerts & Messages</h2>
+
+<div class="alert alert-success">
+<strong>Success!</strong> Your project has been saved.
+</div>
+
+<div class="alert alert-warning">
+<strong>Warning!</strong> Please check your information.
+</div>
+
+<div class="alert alert-danger">
+<strong>Error!</strong> Something went wrong.
+</div>
+
+<div class="alert alert-info alert-dismissible fade show">
+<strong>Information!</strong> Welcome to Bootstrap Studio.
+<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- GRID -->
+<section class="demo-section" id="layouts">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">RESPONSIVE DESIGN</p>
+<h2 class="section-title">Bootstrap Grid System</h2>
+<p class="text-secondary">
+Bootstrap uses a 12-column grid to organize content.
+</p>
+</div>
+
+<div class="row g-3 text-center mb-4">
+
+<div class="col-12">
+<div class="bg-primary text-white rounded p-3">12 Columns – Full Width</div>
+</div>
+
+<div class="col-6">
+<div class="bg-success text-white rounded p-3">6 Columns</div>
+</div>
+
+<div class="col-6">
+<div class="bg-success text-white rounded p-3">6 Columns</div>
+</div>
+
+<div class="col-4">
+<div class="bg-warning rounded p-3">4 Columns</div>
+</div>
+
+<div class="col-4">
+<div class="bg-warning rounded p-3">4 Columns</div>
+</div>
+
+<div class="col-4">
+<div class="bg-warning rounded p-3">4 Columns</div>
+</div>
+
+</div>
+
+<div class="alert alert-light border text-center">
+Resize your browser window to see how responsive layouts work!
+</div>
+
+</div>
+</section>
+
+
+<!-- IMAGE CARDS -->
+<section class="demo-section orange-section">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">VISUAL CONTENT</p>
+<h2 class="section-title">Image Cards & Layouts</h2>
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="card demo-card shadow-sm p-3">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700"
+class="sample-img" alt="Web development workspace">
+<div class="card-body px-0">
+<span class="badge bg-warning text-dark mb-2">Development</span>
+<h5 class="fw-bold">Web Development</h5>
+<p class="text-secondary">Learn to create beautiful websites using HTML, CSS and Bootstrap.</p>
+<a href="#forms" class="btn btn-orange">Explore</a>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card demo-card shadow-sm p-3">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700"
+class="sample-img" alt="Student working">
+<div class="card-body px-0">
+<span class="badge bg-primary mb-2">Learning</span>
+<h5 class="fw-bold">Student Learning</h5>
+<p class="text-secondary">Explore new technologies and improve your technical skills.</p>
+<a href="#about" class="btn btn-orange">Explore</a>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card demo-card shadow-sm p-3">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700"
+class="sample-img" alt="Team collaboration">
+<div class="card-body px-0">
+<span class="badge bg-success mb-2">Creativity</span>
+<h5 class="fw-bold">Creative Projects</h5>
+<p class="text-secondary">Turn your ideas into real-world digital experiences.</p>
+<a href="#about" class="btn btn-orange">Explore</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- CAROUSEL -->
+<section class="demo-section">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">BOOTSTRAP CAROUSEL</p>
+<h2 class="section-title">Explore the Digital World</h2>
+</div>
+
+<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+
+<div class="carousel-indicators">
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+</div>
+
+<div class="carousel-inner">
+
+<div class="carousel-item active">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200"
+class="d-block w-100" alt="Team collaboration">
+<div class="carousel-caption d-none d-md-block">
+<h3>Work Together</h3>
+<p>Build amazing things through collaboration.</p>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
+class="d-block w-100" alt="Coding workspace">
+<div class="carousel-caption d-none d-md-block">
+<h3>Build Something New</h3>
+<p>Transform your ideas into websites.</p>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200"
+class="d-block w-100" alt="Learning">
+<div class="carousel-caption d-none d-md-block">
+<h3>Keep Learning</h3>
+<p>Every line of code takes you forward.</p>
+</div>
+</div>
+
+</div>
+
+<button class="carousel-control-prev" type="button"
+data-bs-target="#mainCarousel" data-bs-slide="prev">
+<span class="carousel-control-prev-icon"></span>
+</button>
+
+<button class="carousel-control-next" type="button"
+data-bs-target="#mainCarousel" data-bs-slide="next">
+<span class="carousel-control-next-icon"></span>
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- FORMS -->
+<section class="demo-section orange-section" id="forms">
+<div class="container">
+<div class="row justify-content-center">
+
+<div class="col-lg-7">
+
+<div class="text-center mb-5">
+<p class="section-label">USER INPUT</p>
+<h2 class="section-title">Registration Form</h2>
+<p class="text-secondary">An example of Bootstrap form components.</p>
+</div>
+
+<div class="card border-0 shadow-sm p-4 p-md-5">
+
+<form id="registrationForm">
+
+<div class="mb-3">
+<label class="form-label fw-semibold">Full Name</label>
+<input type="text" class="form-control"
+placeholder="Enter your full name" required>
+</div>
+
+<div class="mb-3">
+<label class="form-label fw-semibold">Email Address</label>
+<input type="email" class="form-control"
+placeholder="example@email.com" required>
+</div>
+
+<div class="mb-3">
+<label class="form-label fw-semibold">Choose Your Course</label>
+<select class="form-select" required>
+<option value="">Select a course</option>
+<option>Web Development</option>
+<option>Artificial Intelligence</option>
+<option>Data Science</option>
+<option>Computer Applications</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label class="form-label fw-semibold">Message</label>
+<textarea class="form-control" rows="4"
+placeholder="Write something..."></textarea>
+</div>
+
+<div class="form-check mb-4">
+<input class="form-check-input" type="checkbox" required>
+<label class="form-check-label">
+I agree to the terms and conditions.
+</label>
+</div>
+
+<button type="submit" class="btn btn-orange w-100 py-2">
+Submit Registration
+</button>
+
+<div id="formMessage" class="mt-3" aria-live="polite"></div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- TABLE -->
+<section class="demo-section">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">DATA PRESENTATION</p>
+<h2 class="section-title">Bootstrap Table</h2>
+</div>
+
+<div class="table-responsive shadow-sm rounded">
+<table class="table table-hover table-striped mb-0">
+
+<thead class="table-dark">
+<tr>
+<th>#</th>
+<th>Student</th>
+<th>Course</th>
+<th>Status</th>
+<th>Progress</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>01</td>
+<td>Rahul</td>
+<td>BCA</td>
+<td><span class="badge bg-success">Completed</span></td>
+<td>100%</td>
+</tr>
+
+<tr>
+<td>02</td>
+<td>Priya</td>
+<td>Web Design</td>
+<td><span class="badge bg-warning text-dark">Pending</span></td>
+<td>65%</td>
+</tr>
+
+<tr>
+<td>03</td>
+<td>Arjun</td>
+<td>AI & ML</td>
+<td><span class="badge bg-primary">Active</span></td>
+<td>80%</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+
+<nav class="mt-4">
+<ul class="pagination justify-content-center">
+<li class="page-item disabled"><a class="page-link">Previous</a></li>
+<li class="page-item active"><a class="page-link" href="#">1</a></li>
+<li class="page-item"><a class="page-link" href="#">2</a></li>
+<li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
+</nav>
+
+</div>
+</section>
+
+
+<!-- ACCORDION -->
+<section class="demo-section orange-section">
+<div class="container">
+
+<div class="text-center mb-5">
+<p class="section-label">COLLAPSIBLE CONTENT</p>
+<h2 class="section-title">Frequently Asked Questions</h2>
+</div>
+
+<div class="row justify-content-center">
+<div class="col-lg-8">
+
+<div class="accordion" id="faqAccordion">
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button" type="button"
+data-bs-toggle="collapse" data-bs-target="#faqOne">
+What is Bootstrap?
+</button>
+</h2>
+<div id="faqOne" class="accordion-collapse collapse show"
+data-bs-parent="#faqAccordion">
+<div class="accordion-body">
+Bootstrap is a popular front-end framework used to create
+responsive and mobile-friendly websites.
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" type="button"
+data-bs-toggle="collapse" data-bs-target="#faqTwo">
+Is Bootstrap beginner friendly?
+</button>
+</h2>
+<div id="faqTwo" class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+<div class="accordion-body">
+Yes! Bootstrap offers ready-made classes and components
+that make web development easier.
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" type="button"
+data-bs-toggle="collapse" data-bs-target="#faqThree">
+Is Bootstrap responsive?
+</button>
+</h2>
+<div id="faqThree" class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+<div class="accordion-body">
+Yes. Its grid system and responsive utility classes
+help websites adapt to different screens.
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- MODAL -->
+<section class="demo-section">
+<div class="container text-center">
+
+<p class="section-label">BOOTSTRAP MODAL</p>
+<h2 class="section-title mb-3">Interactive Popup Window</h2>
+
+<p class="text-secondary mb-4">
+Click the button below to experience a Bootstrap modal.
+</p>
+
+<button class="btn btn-orange btn-lg rounded-pill px-5"
+data-bs-toggle="modal" data-bs-target="#exampleModal">
+Open Modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-header">
+<h5 class="modal-title fw-bold">Welcome to Bootstrap Studio!</h5>
+<button type="button" class="btn-close"
+data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+You have successfully explored another Bootstrap component.
+Keep experimenting and building!
+</div>
+
+<div class="modal-footer">
+<button class="btn btn-orange"
+data-bs-dismiss="modal">Awesome!</button>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="hero py-5" id="about">
+<div class="container text-center py-4">
+
+<p class="section-label">ABOUT THIS PROJECT</p>
+
+<h2 class="fw-bold display-5">
+Learning Today. Building Tomorrow.
+</h2>
+
+<p class="text-light col-lg-8 mx-auto mt-3">
+Bootstrap Studio is a student-created demonstration website
+designed to showcase the essential features of the Bootstrap
+framework through practical examples and interactive components.
+</p>
+
+<a href="#home" class="btn btn-orange btn-lg rounded-pill mt-3 px-5">
+Back to Top ↑
+</a>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer py-5">
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-md-5">
+<h4 class="fw-bold">
+BOOTSTRAP<span style="color:#ff792f">.</span>STUDIO
+</h4>
+
+<p class="text-secondary mt-3">
+A creative student project exploring modern
+web development with Bootstrap.
+</p>
+</div>
+
+<div class="col-md-3">
+<h6 class="fw-bold">Quick Links</h6>
+<ul class="list-unstyled mt-3">
+<li class="mb-2"><a href="#home">Home</a></li>
+<li class="mb-2"><a href="#components">Components</a></li>
+<li class="mb-2"><a href="#layouts">Layouts</a></li>
+<li class="mb-2"><a href="#forms">Forms</a></li>
+</ul>
+</div>
+
+<div class="col-md-4">
+<h6 class="fw-bold">Technology Used</h6>
+<div class="d-flex flex-wrap gap-2 mt-3">
+<span class="badge bg-secondary">HTML5</span>
+<span class="badge bg-secondary">CSS3</span>
+<span class="badge bg-secondary">Bootstrap 5</span>
+<span class="badge bg-secondary">JavaScript</span>
+</div>
+</div>
+
+</div>
+
+<hr class="border-secondary mt-4">
+
+<!-- HIDDEN FOOTER EASTER EGG -->
+<div class="text-center mb-3">
+
+<button class="secret-btn" id="secretButton" title="A little mystery">
+?
+</button>
+
+<div id="footerSecret" class="secret-message">
+🤫 Between you and me...<br>
+This website was built with curiosity,
+caffeine and a little bit of debugging!
+<br><br>
+<small>— A student developer</small>
+</div>
+
+</div>
+
+<div class="text-center text-secondary">
+<small>© 2026 Bootstrap Studio | Created as a Student Project | By - Ashish Jorong Mundu </small>
+</div>
+
+</div>
+</footer>
+
+
+<!-- BOOTSTRAP JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+// REGISTRATION FORM
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("formMessage").innerHTML =
+    '<div class="alert alert-success">Registration submitted successfully! (Demo only)</div>';
+
+    this.reset();
+});
+
+
+// TOAST FUNCTION
+function showToast(message) {
+
+    let toast = document.getElementById("eggToast");
+
+    toast.innerHTML = `
+        <div class="alert alert-dark shadow-lg rounded-4">
+            ${message}
+            <button type="button" class="btn-close float-end"
+            aria-label="Close"></button>
+        </div>
+    `;
+
+    toast.style.display = "block";
+
+    toast.querySelector(".btn-close").addEventListener("click", () => {
+        toast.style.display = "none";
+        clearTimeout(window.toastTimer);
+    });
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 3500);
+}
+
+
+// 1. SECRET TITLE - CLICK THREE TIMES
+let titleClicks = 0;
+
+document.getElementById("secretTitle").addEventListener("click", function() {
+
+    titleClicks++;
+
+    if(titleClicks >= 3) {
+
+        document.getElementById("titleSecret").classList.toggle("show");
+
+        showToast("🎉 You discovered the hidden message!");
+
+        titleClicks = 0;
+    }
+});
+
+
+// 2. SECRET FOOTER BUTTON
+document.getElementById("secretButton").addEventListener("click", function() {
+
+    document.getElementById("footerSecret").classList.toggle("show");
+
+});
+
+
+// 3. RANDOM COMPLIMENTS
+const compliments = [
+    "You're doing great, future developer! 🚀",
+    "Your code is looking sharp! 💻",
+    "Keep experimenting. That's how developers learn!",
+    "Bootstrap would be proud of you! 😎",
+    "One more line of code, one step closer!",
+    "404: Lack of creativity not found!",
+    "Your curiosity is your greatest superpower!"
+];
+
+document.getElementById("complimentBadge").addEventListener("click", function() {
+
+    const random = Math.floor(Math.random() * compliments.length);
+
+    showToast(compliments[random]);
+
+});
+
+
+// 4. SECRET LOGO - CLICK FIVE TIMES
+let logoClicks = 0;
+
+document.getElementById("brandLogo").addEventListener("click", function(event) {
+
+    event.preventDefault();
+
+    logoClicks++;
+
+    if(logoClicks === 5) {
+
+        showToast("🏆 Developer mode unlocked! Keep building!");
+
+        document.body.style.backgroundColor = "#fff0e7";
+
+        setTimeout(() => {
+            document.body.style.backgroundColor = "#f8f9fa";
+        }, 1200);
+
+        logoClicks = 0;
+    }
+
+});
+
+
+// 5. SECRET PROGRESS BAR
+let progressClicks = 0;
+
+document.getElementById("secretProgress").addEventListener("click", function() {
+
+    progressClicks++;
+
+    let progress = Math.min(60 + progressClicks * 10, 100);
+
+    document.getElementById("progressBar").style.width = progress + "%";
+
+    document.getElementById("progressValue").innerText = progress + "%";
+
+    if(progress >= 100) {
+        showToast("🎓 Bootstrap Master! Progress completed!");
+        progressClicks = 0;
+    } else {
+        showToast("⚡ Progress increased! Keep going!");
+    }
+
+});
+
+
+// 6. KONAMI CODE
+const secretCode = [
+    "ArrowUp", "ArrowUp",
+    "ArrowDown", "ArrowDown",
+    "ArrowLeft", "ArrowRight",
+    "ArrowLeft", "ArrowRight",
+    "b", "a"
+];
+
+let enteredCode = [];
+
+document.addEventListener("keydown", function(event) {
+
+    if(["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
+        return;
+    }
+
+    enteredCode.push(event.key);
+
+    enteredCode = enteredCode.slice(-secretCode.length);
+
+    if(JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
+
+        document.getElementById("celebration").classList.add("show");
+
+        enteredCode = [];
+    }
+
+    // SECRET B KEY
+    if(event.key.toLowerCase() === "b") {
+        showToast("💻 B stands for Bootstrap... obviously!");
+    }
+
+});
+
+
+// CLOSE SECRET CELEBRATION
+document.getElementById("closeCelebration").addEventListener("click", function() {
+
+    document.getElementById("celebration").classList.remove("show");
+
+});
+
+
+// ESCAPE KEY CLOSES CELEBRATION
+document.addEventListener("keydown", function(event) {
+
+    if(event.key === "Escape") {
+        document.getElementById("celebration").classList.remove("show");
+    }
+
+});
+
+
+// 7. DEVELOPER CONSOLE MESSAGE
+console.log(
+    "%c👋 Hello, curious developer!",
+    "color:#ff792f;font-size:20px;font-weight:bold"
+);
+
+console.log(
+    "%cIf you're reading this, you've discovered the developer console. Happy inspecting!",
+    "color:#172033;font-size:13px"
+);
+
+console.log(
+    "%cMade with HTML, CSS, Bootstrap and a little creativity. ☕",
+    "color:#e9631c;font-size:14px"
+);
+
+</script>
+
+</body>
+</html>
+
